@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-public class ServiceImpl extends CommonService implements Service{
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+public class ServiceImpl extends CommonService implements Service {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private DaoService daoService;
 
@@ -35,11 +35,11 @@ public class ServiceImpl extends CommonService implements Service{
         try {
             if (contact.getNumber().matches(".*[a-zA-Z]+.*")) {
                 return Constant.ERROR_NUMBER_1;
-            }else {
+            } else {
                 daoService.create(contact);
                 return Constant.SUCCESS_CREATE;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.info(generateJson(e));
             return Constant.ERROR_CREATE;
         }
@@ -50,7 +50,7 @@ public class ServiceImpl extends CommonService implements Service{
         try {
             daoService.delete(id);
             return Constant.SUCCESS_DELETE;
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.info(generateJson(e));
             return Constant.ERROR_DELETE;
         }
@@ -61,7 +61,7 @@ public class ServiceImpl extends CommonService implements Service{
         try {
             daoService.update(id, contact);
             return Constant.SUCCESS_UPDATE;
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.info(generateJson(e));
             return Constant.ERROR_UPDATE;
         }
